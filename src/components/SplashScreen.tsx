@@ -53,13 +53,14 @@ const SplashScreen = () => {
       });
     }, 100);
     
+    // Keep fingerprint scanning animation running continuously
     const fingerprintScanningTimer = setTimeout(() => {
       setFingerprintScanComplete(true);
-    }, 1800);
+    }, 2500);
     
     const fingerprintTimer = setTimeout(() => {
       setFingerprintScanning(false);
-    }, 2000);
+    }, 3000);
     
     const filesTimer = setTimeout(() => {
       setFilesAnimating(true);
@@ -118,8 +119,7 @@ const SplashScreen = () => {
       "Name: CONFIDENTIAL",
       "Home Address: CONFIDENTIAL",
       "Identity Card No: ENCRYPTED",
-      "Passport No: ENCRYPTED", 
-      "Income Tax No: RESTRICTED"
+      "Passport No: ENCRYPTED"
     ];
     
     let itemIndex = 0;
@@ -175,12 +175,12 @@ const SplashScreen = () => {
   ));
   
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-between bg-gradient-to-br from-cyber-dark-blue to-cyber-black overflow-hidden">
+    <div className="fixed inset-0 z-50 flex flex-col justify-between bg-cyber-dark-blue overflow-hidden">
       <div className="w-full">
         {binaryDataRows.slice(0, 2)}
       </div>
       
-      <div className="absolute inset-0 bg-[url('/lovable-uploads/1ba0c6b1-a94e-4081-bae3-968760ef5fa7.png')] bg-cover bg-center opacity-80"></div>
+      <div className="absolute inset-0 bg-[url('/lovable-uploads/9a8f8a09-c189-4971-84e3-68b7834f763e.png')] bg-cover bg-center opacity-30"></div>
       
       <div className="absolute inset-0 bg-cyber-grid bg-[length:20px_20px] md:bg-[length:30px_30px] opacity-10"></div>
       
@@ -203,20 +203,22 @@ const SplashScreen = () => {
       
       <div className="scan-line"></div>
       
-      <div className="flex-1 container mx-auto z-10 px-3 md:px-6 py-4 flex flex-col">
-        <div className="cyber-text-glow text-lg md:text-2xl mb-4 text-center">PERSONAL DATA ACCESS PROTOCOL</div>
+      <div className="flex-1 container px-4 z-10 flex flex-col items-center">
+        <div className="cyber-text-glow text-2xl my-8 text-center px-8 py-3 border border-cyber-blue/50 w-full max-w-4xl">
+          PERSONAL DATA ACCESS PROTOCOL
+        </div>
         
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 h-[55vh]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mx-auto mb-6">
           <div className="grid grid-rows-3 gap-4">
-            <div className="cyber-box p-4 flex flex-col items-center justify-center animate-fade-in relative">
-              <div className="relative w-16 h-16 md:w-20 md:h-20">
+            <div className="cyber-box flex flex-col items-center justify-center animate-fade-in relative h-[120px]">
+              <div className="relative w-20 h-20">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-full h-full border-2 border-cyber-blue/50 rounded-full overflow-hidden">
-                    <div className="w-full h-full bg-cyber-blue/20 flex items-center justify-center">
+                  <div className="w-full h-full border border-cyber-blue rounded-full overflow-hidden">
+                    <div className="w-full h-full bg-cyber-blue/10 flex items-center justify-center">
                       <img 
                         src="/lovable-uploads/519c1b85-0c98-446f-ac5d-901867f307d9.png" 
                         alt="Fingerprint" 
-                        className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                        className="w-16 h-16 object-contain opacity-80"
                       />
                     </div>
                   </div>
@@ -224,7 +226,7 @@ const SplashScreen = () => {
                 
                 <>
                   <div className="absolute inset-0 overflow-hidden rounded-full">
-                    <div className="absolute left-0 w-full bg-gradient-to-b from-cyber-blue/70 via-cyber-blue/20 to-transparent h-1/3 animate-scan-v"></div>
+                    <div className="absolute left-0 w-full bg-gradient-to-b from-cyber-blue/50 via-cyber-blue/20 to-transparent h-1/3 animate-scan-v"></div>
                   </div>
                   
                   <div className="absolute inset-0">
@@ -233,52 +235,27 @@ const SplashScreen = () => {
                       <div className="w-0.5 h-full bg-cyber-blue/70 absolute animate-[scan-h_2s_linear_infinite]"></div>
                     </div>
                   </div>
-                  
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full h-full border border-cyber-blue/30 rounded-full animate-pulse"></div>
-                  </div>
                 </>
                 
-                {fingerprintScanComplete && (
-                  <div className="absolute inset-0">
-                    {Array.from({ length: 8 }, (_, i) => {
-                      const angle = (i * Math.PI) / 4;
-                      const x = 50 + 47 * Math.cos(angle);
-                      const y = 50 + 47 * Math.sin(angle);
-                      return (
-                        <div
-                          key={i}
-                          className="absolute w-1 h-1 md:w-1.5 md:h-1.5 bg-cyber-blue rounded-full animate-pulse-glow"
-                          style={{
-                            top: `${y}%`,
-                            left: `${x}%`,
-                            animationDelay: `${i * 0.1}s`
-                          }}
-                        />
-                      );
-                    })}
+                {!fingerprintScanning && (
+                  <div className="absolute top-[-15px] right-[-15px] bg-cyber-blue/20 px-2 py-1 text-xs text-cyber-blue border border-cyber-blue/50">
+                    MATCH FOUND
                   </div>
                 )}
               </div>
               
-              {!fingerprintScanning && (
-                <div className="absolute top-2 right-2 bg-cyber-blue/20 px-2 py-1 text-xs text-cyber-blue">
-                  MATCH FOUND
-                </div>
-              )}
-              
-              <p className="cyber-text mt-2 text-center text-xs">FINGERPRINT<br/>IDENTIFICATION</p>
+              <p className="cyber-text mt-3 text-center text-xs">FINGERPRINT<br/>IDENTIFICATION</p>
             </div>
             
-            <div className="cyber-box p-4 flex flex-col items-center justify-center animate-fade-in">
-              <Lock className="w-10 h-10 md:w-12 md:h-12 text-cyber-blue animate-pulse-glow" />
+            <div className="cyber-box flex flex-col items-center justify-center animate-fade-in h-[120px]">
+              <Lock className="w-16 h-16 text-cyber-blue" />
               <p className="cyber-text mt-2 text-center text-xs">CONFIDENTIAL<br/>DATA</p>
-              <div className="mt-2 h-1 bg-cyber-blue/30 w-full">
+              <div className="mt-2 h-1 bg-cyber-blue/30 w-full max-w-[150px]">
                 <div className="h-full bg-cyber-blue animate-pulse-glow" style={{ width: '100%' }}></div>
               </div>
             </div>
             
-            <div className="cyber-box p-4 flex flex-col animate-fade-in">
+            <div className="cyber-box p-4 flex flex-col animate-fade-in h-[120px]">
               <div className="flex-1 grid grid-cols-3 grid-rows-2 gap-2">
                 {Array.from({ length: 6 }, (_, i) => (
                   <div 
@@ -288,22 +265,21 @@ const SplashScreen = () => {
                     }`}
                     style={{ animationDelay: `${filesAnimating ? 0.15 * i : 0}s` }}
                   >
-                    <FileDigit className="w-7 h-7 md:w-9 md:h-9 text-cyber-blue" />
+                    <FileDigit className="w-10 h-10 text-cyber-blue" />
                   </div>
                 ))}
               </div>
-              <p className="cyber-text mt-2 text-center text-xs">ARCHIVED FILES</p>
             </div>
           </div>
           
-          <div className="cyber-box flex flex-col animate-fade-in md:max-h-[350px] h-full">
-            <div className="bg-cyber-blue/20 border-b border-cyber-blue py-2 px-4">
-              <p className="cyber-text text-center text-sm md:text-base">[Identity Person]</p>
+          <div className="cyber-box flex flex-col animate-fade-in h-[380px]">
+            <div className="bg-cyber-blue/10 border-b border-cyber-blue py-2 px-4">
+              <p className="cyber-text text-center">[Identity Person]</p>
             </div>
             <div className="flex-1 p-4 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-b from-cyber-blue/5 to-cyber-dark-blue/20"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-cyber-blue/5 to-transparent"></div>
               
-              <div className="relative w-full max-w-[100px] md:max-w-[120px] aspect-square mx-auto">
+              <div className="relative w-full max-w-[150px] aspect-square mx-auto">
                 {personIdentified ? (
                   <User className="w-full h-full text-cyber-blue/90 animate-pulse-glow" />
                 ) : (
@@ -312,9 +288,9 @@ const SplashScreen = () => {
                   </div>
                 )}
                 
-                <div className="absolute inset-0 overflow-hidden opacity-80 mix-blend-screen">
+                <div className="absolute inset-0 overflow-hidden opacity-80">
                   {Array.from({ length: 20 }, (_, i) => (
-                    <div key={i} className="text-[6px] md:text-[7px] text-cyber-matrix" style={{ 
+                    <div key={i} className="text-[7px] text-cyber-matrix" style={{ 
                       position: 'absolute', 
                       top: `${i * 5}%`, 
                       left: 0, 
@@ -325,27 +301,8 @@ const SplashScreen = () => {
                   ))}
                 </div>
                 
-                <div className="absolute inset-0">
-                  {Array.from({ length: 8 }, (_, i) => {
-                    const angle = (i * Math.PI) / 4;
-                    const x = 50 + 50 * Math.cos(angle);
-                    const y = 50 + 50 * Math.sin(angle);
-                    return (
-                      <div
-                        key={i}
-                        className="absolute w-1 h-1 md:w-1.5 md:h-1.5 bg-cyber-blue rounded-full animate-pulse-glow"
-                        style={{
-                          top: `${y}%`,
-                          left: `${x}%`,
-                          animationDelay: `${i * 0.2}s`
-                        }}
-                      />
-                    );
-                  })}
-                </div>
-                
                 {personIdentified && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-cyber-blue/20 text-cyber-blue py-1 text-center text-xs md:text-sm animate-fade-in">
+                  <div className="absolute bottom-0 left-0 right-0 bg-cyber-blue/20 text-cyber-blue py-1 text-center border-t border-cyber-blue/50">
                     IDENTIFIED
                   </div>
                 )}
@@ -353,15 +310,15 @@ const SplashScreen = () => {
             </div>
           </div>
           
-          <div className="cyber-box flex flex-col animate-fade-in md:max-h-[350px] h-full">
-            <div className="bg-cyber-blue/20 border-b border-cyber-blue py-2 px-4">
-              <p className="cyber-text text-center text-sm md:text-base">Personal Data</p>
+          <div className="cyber-box flex flex-col animate-fade-in h-[380px]">
+            <div className="bg-cyber-blue/10 border-b border-cyber-blue py-2 px-4">
+              <p className="cyber-text text-center">Personal Data</p>
             </div>
-            <div className="flex-1 p-4 flex flex-col space-y-2 overflow-y-auto">
+            <div className="flex-1 p-4 flex flex-col space-y-4">
               {personalDataText.split('\n').filter(Boolean).map((line, index) => {
                 const [label, value] = line.split(': ');
                 return (
-                  <div key={index} className="cyber-box p-2 bg-cyber-blue/10 border-cyber-blue/50 flex justify-between items-center">
+                  <div key={index} className="cyber-box p-2 bg-cyber-black border-cyber-blue/50 flex justify-between items-center">
                     <span className="cyber-text text-xs">{label}</span>
                     <span className="cyber-text text-xs animate-pulse-glow">{value}</span>
                   </div>
@@ -371,24 +328,22 @@ const SplashScreen = () => {
           </div>
         </div>
         
-        <div className="mt-auto pt-12">
-          <div className="cyber-box p-3 bg-black/80">
-            <p className="cyber-text text-xs md:text-sm">{loadingText}</p>
-            <div className="w-full bg-cyber-gray/50 h-1.5 rounded-sm mt-2">
-              <div 
-                className="h-full bg-cyber-blue animate-pulse-glow rounded-sm transition-all duration-100 ease-linear" 
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            <div className="flex justify-between mt-1">
-              <p className="cyber-text text-[10px] md:text-xs">SECURITY ACCESS: {progress >= 100 ? 'GRANTED' : 'VERIFYING...'}</p>
-              <p className="cyber-text text-[10px] md:text-xs">{Math.floor(progress)}%</p>
-            </div>
+        <div className="cyber-box p-4 bg-black/80 w-full max-w-5xl mx-auto mb-8">
+          <p className="cyber-text text-sm">{loadingText || "INITIALIZING SECURITY PROTOCOLS...undefined"}</p>
+          <div className="w-full bg-cyber-gray/50 h-2 rounded-sm mt-3">
+            <div 
+              className="h-full bg-cyber-blue rounded-sm transition-all duration-100 ease-linear" 
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <div className="flex justify-between mt-2">
+            <p className="cyber-text text-xs">SECURITY ACCESS: {progress >= 100 ? 'GRANTED' : 'VERIFYING...'}</p>
+            <p className="cyber-text text-xs">{Math.round(progress)}%</p>
           </div>
         </div>
       </div>
       
-      <div className="w-full mt-4 mb-4">
+      <div className="w-full mt-auto">
         {binaryDataRows.slice(2, 4)}
       </div>
     </div>
