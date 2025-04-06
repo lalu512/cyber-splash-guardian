@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, FileDigit, Fingerprint, User, Check } from 'lucide-react';
@@ -177,18 +176,14 @@ const SplashScreen = () => {
   
   return (
     <div className="fixed inset-0 z-50 flex flex-col justify-between bg-gradient-to-br from-cyber-dark-blue to-cyber-black overflow-hidden">
-      {/* Binary data rows at top */}
       <div className="w-full">
         {binaryDataRows.slice(0, 2)}
       </div>
       
-      {/* Digital radial background with lines */}
       <div className="absolute inset-0 bg-[url('/lovable-uploads/1ba0c6b1-a94e-4081-bae3-968760ef5fa7.png')] bg-cover bg-center opacity-80"></div>
       
-      {/* Grid lines */}
       <div className="absolute inset-0 bg-cyber-grid bg-[length:20px_20px] md:bg-[length:30px_30px] opacity-10"></div>
       
-      {/* Connecting lines */}
       <div className="absolute inset-0 pointer-events-none">
         <svg className="w-full h-full opacity-50" viewBox="0 0 1000 600" preserveAspectRatio="none">
           <g stroke="#0cf" strokeWidth="1" fill="none">
@@ -206,56 +201,44 @@ const SplashScreen = () => {
         </svg>
       </div>
       
-      {/* Scan line effect */}
       <div className="scan-line"></div>
       
-      {/* Main content area */}
       <div className="flex-1 container mx-auto z-10 px-3 md:px-6 py-4 flex flex-col">
         <div className="cyber-text-glow text-lg md:text-2xl mb-4 text-center">PERSONAL DATA ACCESS PROTOCOL</div>
         
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 h-[55vh]"> {/* Reduced height from 60vh to 55vh */}
-          {/* Left sidebar boxes */}
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 h-[55vh]">
           <div className="grid grid-rows-3 gap-4">
-            {/* Fingerprint scanning box */}
             <div className="cyber-box p-4 flex flex-col items-center justify-center animate-fade-in relative">
               <div className="relative w-16 h-16 md:w-20 md:h-20">
-                {/* Base fingerprint */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-full h-full border-2 border-cyber-blue/50 rounded-full overflow-hidden">
                     <div className="w-full h-full bg-cyber-blue/20 flex items-center justify-center">
-                      {fingerprintScanning ? (
-                        <Fingerprint className="w-12 h-12 md:w-16 md:h-16 text-cyber-blue animate-pulse-glow" />
-                      ) : (
-                        <Check className="w-12 h-12 md:w-16 md:h-16 text-cyber-blue animate-pulse-glow" />
-                      )}
+                      <img 
+                        src="/lovable-uploads/519c1b85-0c98-446f-ac5d-901867f307d9.png" 
+                        alt="Fingerprint" 
+                        className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                      />
                     </div>
                   </div>
                 </div>
                 
-                {/* Scanning effect */}
-                {fingerprintScanning && (
-                  <>
-                    {/* Vertical scanning line */}
-                    <div className="absolute inset-0 overflow-hidden rounded-full">
-                      <div className="absolute left-0 w-full bg-gradient-to-b from-cyber-blue/70 via-cyber-blue/20 to-transparent h-1/3 animate-fingerprint-scan"></div>
+                <>
+                  <div className="absolute inset-0 overflow-hidden rounded-full">
+                    <div className="absolute left-0 w-full bg-gradient-to-b from-cyber-blue/70 via-cyber-blue/20 to-transparent h-1/3 animate-scan-v"></div>
+                  </div>
+                  
+                  <div className="absolute inset-0">
+                    <div className="absolute top-0 left-0 w-full h-full">
+                      <div className="w-full h-0.5 bg-cyber-blue/70 absolute animate-[scan-v_2s_linear_infinite]"></div>
+                      <div className="w-0.5 h-full bg-cyber-blue/70 absolute animate-[scan-h_2s_linear_infinite]"></div>
                     </div>
-                    
-                    {/* Cross-hair scan lines */}
-                    <div className="absolute inset-0">
-                      <div className="absolute top-0 left-0 w-full h-full">
-                        <div className="w-full h-0.5 bg-cyber-blue/70 absolute animate-[scan-v_2s_linear_infinite]"></div>
-                        <div className="w-0.5 h-full bg-cyber-blue/70 absolute animate-[scan-h_2s_linear_infinite]"></div>
-                      </div>
-                    </div>
-                    
-                    {/* Pulsing scan circle */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-full h-full border border-cyber-blue/30 rounded-full animate-pulse"></div>
-                    </div>
-                  </>
-                )}
+                  </div>
+                  
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-full h-full border border-cyber-blue/30 rounded-full animate-pulse"></div>
+                  </div>
+                </>
                 
-                {/* Success indicator dots */}
                 {fingerprintScanComplete && (
                   <div className="absolute inset-0">
                     {Array.from({ length: 8 }, (_, i) => {
@@ -287,7 +270,6 @@ const SplashScreen = () => {
               <p className="cyber-text mt-2 text-center text-xs">FINGERPRINT<br/>IDENTIFICATION</p>
             </div>
             
-            {/* Confidential data box */}
             <div className="cyber-box p-4 flex flex-col items-center justify-center animate-fade-in">
               <Lock className="w-10 h-10 md:w-12 md:h-12 text-cyber-blue animate-pulse-glow" />
               <p className="cyber-text mt-2 text-center text-xs">CONFIDENTIAL<br/>DATA</p>
@@ -296,7 +278,6 @@ const SplashScreen = () => {
               </div>
             </div>
             
-            {/* Files box */}
             <div className="cyber-box p-4 flex flex-col animate-fade-in">
               <div className="flex-1 grid grid-cols-3 grid-rows-2 gap-2">
                 {Array.from({ length: 6 }, (_, i) => (
@@ -315,8 +296,7 @@ const SplashScreen = () => {
             </div>
           </div>
           
-          {/* Center main box - Identity - Making it smaller */}
-          <div className="cyber-box flex flex-col animate-fade-in md:max-h-[350px] h-full"> {/* Added max height */}
+          <div className="cyber-box flex flex-col animate-fade-in md:max-h-[350px] h-full">
             <div className="bg-cyber-blue/20 border-b border-cyber-blue py-2 px-4">
               <p className="cyber-text text-center text-sm md:text-base">[Identity Person]</p>
             </div>
@@ -373,8 +353,7 @@ const SplashScreen = () => {
             </div>
           </div>
           
-          {/* Right sidebar - Personal Data */}
-          <div className="cyber-box flex flex-col animate-fade-in md:max-h-[350px] h-full"> {/* Added max height */}
+          <div className="cyber-box flex flex-col animate-fade-in md:max-h-[350px] h-full">
             <div className="bg-cyber-blue/20 border-b border-cyber-blue py-2 px-4">
               <p className="cyber-text text-center text-sm md:text-base">Personal Data</p>
             </div>
@@ -392,8 +371,7 @@ const SplashScreen = () => {
           </div>
         </div>
         
-        {/* Terminal status - Adding more space below boxes */}
-        <div className="mt-auto pt-12"> {/* Increased padding-top from 8 to 12 */}
+        <div className="mt-auto pt-12">
           <div className="cyber-box p-3 bg-black/80">
             <p className="cyber-text text-xs md:text-sm">{loadingText}</p>
             <div className="w-full bg-cyber-gray/50 h-1.5 rounded-sm mt-2">
@@ -410,7 +388,6 @@ const SplashScreen = () => {
         </div>
       </div>
       
-      {/* Binary data rows at bottom - Added more space by adding mb-4 to create distance from the terminal box */}
       <div className="w-full mt-4 mb-4">
         {binaryDataRows.slice(2, 4)}
       </div>
