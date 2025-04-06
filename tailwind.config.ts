@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,6 +20,13 @@ export default {
 		},
 		extend: {
 			colors: {
+				'cyber-blue': '#0CF',
+				'cyber-blue-dark': '#0086a8',
+				'cyber-black': '#000913',
+				'cyber-dark-blue': '#001326',
+				'cyber-gray': '#525a64',
+				'cyber-matrix': '#00FF41',
+				
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -63,6 +71,9 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			backgroundImage: {
+				'cyber-grid': 'linear-gradient(#0CF 1px, transparent 1px), linear-gradient(90deg, #0CF 1px, transparent 1px)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -84,11 +95,103 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'scan': {
+					'0%': {
+						transform: 'translateY(0)'
+					},
+					'100%': {
+						transform: 'translateY(100vh)'
+					}
+				},
+				'marquee': {
+					'from': {
+						transform: 'translateX(0)'
+					},
+					'to': {
+						transform: 'translateX(-50%)'
+					}
+				},
+				'scan-v': {
+					'0%': {
+						transform: 'translateY(-100%)'
+					},
+					'100%': {
+						transform: 'translateY(100%)'
+					}
+				},
+				'scan-h': {
+					'0%': {
+						transform: 'translateX(-100%)'
+					},
+					'100%': {
+						transform: 'translateX(100%)'
+					}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						opacity: '1',
+						filter: 'brightness(1)'
+					},
+					'50%': {
+						opacity: '0.7',
+						filter: 'brightness(1.3)'
+					}
+				},
+				'draw-line': {
+					'0%': {
+						strokeDashoffset: '1000',
+						opacity: '0'
+					},
+					'10%': {
+						opacity: '1'
+					},
+					'100%': {
+						strokeDashoffset: '0',
+						opacity: '1'
+					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fingerprint-scan': {
+					'0%': {
+						height: '0%',
+						opacity: '0'
+					},
+					'10%': {
+						height: '0%',
+						opacity: '1'
+					},
+					'90%': {
+						height: '100%',
+						opacity: '1'
+					},
+					'100%': {
+						height: '100%',
+						opacity: '0'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'scan': 'scan 2s linear infinite',
+				'marquee': 'marquee 20s linear infinite',
+				'marquee-reverse': 'marquee 20s linear infinite reverse',
+				'scan-v': 'scan-v 2s linear infinite',
+				'scan-h': 'scan-h 2s linear infinite', 
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'draw-line': 'draw-line 2s forwards',
+				'fade-in': 'fade-in 0.5s forwards',
+				'fingerprint-scan': 'fingerprint-scan 2s ease-in-out'
 			}
 		}
 	},
