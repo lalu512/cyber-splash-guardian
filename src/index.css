@@ -114,4 +114,141 @@
     animation: scan 2s linear infinite;
     box-shadow: 0 0 15px #0CF;
   }
+
+  .terminal-link {
+    @apply text-cyber-matrix relative inline-block transition-all duration-200;
+    position: relative;
+  }
+
+  .terminal-link:hover, .terminal-link:focus {
+    @apply text-cyber-matrix/100;
+    text-shadow: 0 0 3px #00FF41, 0 0 7px #00FF41;
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  .terminal-link::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-full h-[1px] bg-cyber-matrix scale-x-0 origin-bottom-left transition-transform duration-300;
+  }
+
+  .terminal-link:hover::after, .terminal-link:focus::after {
+    @apply scale-x-100;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scan-v {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes scan-h {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.7;
+    filter: brightness(1.3);
+  }
+}
+
+@keyframes draw-line {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fingerprint-scan {
+  0% {
+    height: 0%;
+    opacity: 0;
+  }
+  10% {
+    height: 0%;
+    opacity: 1;
+  }
+  90% {
+    height: 100%;
+    opacity: 1;
+  }
+  100% {
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* Terminal-specific scrollbar styling */
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-track {
+  @apply bg-cyber-black;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-cyber-matrix/30 rounded-full;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-cyber-matrix/50;
 }
